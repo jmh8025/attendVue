@@ -77,15 +77,6 @@
     </v-dialog>
   </v-row>
 
-
-
-
-
-
-
-
-
-
 </v-card>
 </template>
 
@@ -135,7 +126,7 @@ export default {
                     no: '1',
                     name: '남상범',
                     birth: '1992-06-30',
-                    suhumNo: '1111',
+                    suhumNo: '920630',
                     unit: '엠엔씨부',
                 },
                 {
@@ -1031,7 +1022,9 @@ export default {
             }
         },
         onDecode (decodedString) {
-            // ...
+            // alert(decodedString)
+            this.search = decodedString;
+            showModal = false;
         }
     },
     fetch(){
