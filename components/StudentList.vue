@@ -1024,7 +1024,7 @@ export default {
         onDecode (decodedString) {
             // alert(decodedString)
             this.search = decodedString;
-            showModal = false;
+            this.showModal = false;
         }
     },
     fetch(){
