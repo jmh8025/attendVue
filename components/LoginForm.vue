@@ -6,7 +6,7 @@
                 <v-card class="elevation-12">
                     <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm">
                         <v-toolbar flat>
-                            <v-toolbar-title><v-img src='~assets/img/logo.png'></v-img></v-toolbar-title>
+                            <v-toolbar-title><v-img src='/img/logo.png'></v-img></v-toolbar-title>
                             <v-spacer></v-spacer>
                         </v-toolbar>
                         <v-card-text>
