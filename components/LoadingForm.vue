@@ -8,7 +8,7 @@
                     name="fade" 
                     v-on:after-enter="afterLogo"
                 > 
-                    <img v-show="logoShow" width="50%" src='~assets/img/big_logo.png' />
+                    <img ref="logo" v-show="logoShow" width="50%" src='~assets/img/big_logo.png' />
                 </transition> 
             </div>
             <div style="text-align: center;" v-show="loadingShow">
@@ -17,6 +17,7 @@
 
             <transition 
                 name="fade-login" 
+                v-on:after-leave="afterLoginForm"
             >
             <v-card class="elevation-12" v-show="loginFormShow">
                 <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm">
@@ -76,7 +77,6 @@
 export default {
      data(){
         return{
-            testshow : true,
             logoShow : false,
             loadingShow : false,
             loginFormShow : false,
@@ -104,12 +104,8 @@ export default {
     },
     methods: {
         onSubmitForm(){
-            console.log(this.$refs.form)
             if(this.$refs.form.validate()){
-                this.testshow = !this.testshow;
-                  this.$router.push({
-                          path : '/attendList',
-                 });
+                this.loginFormShow=false;
             }else{
                 alert("입력값을 확인하세요.");
             }
@@ -132,6 +128,20 @@ export default {
         },
         fadeLogo(){
             this.logoShow=true;
+        },
+        afterLoginForm(){
+            
+            this.$refs.logo.style.transform = `translateY(-167px)`;
+            setTimeout(()=>{
+                this.$refs.logo.style.transform = `translateY(0px)`;
+                this.$refs.logo.style.transition = `all 1.5s ease`;
+                this.goList();
+            },300);
+            setTimeout(()=>{
+                this.$router.push({
+                    path : '/attendList',
+                });
+            },4000);
         }
     },
     mounted() { 
@@ -166,9 +176,9 @@ export default {
     transition: all 3s ease; 
 } 
 .fade-login-leave-active { 
-    transition: all 3s cubic-bezier(1, 0.5, 0.8, 1); 
+    transition: all 1.5s cubic-bezier(1, 0.5, 0.8, 1); 
 } 
-.fade-login-enter, 
+.fade-login-enter,
 .fade-login-leave-active { 
     opacity: 0; 
 }
