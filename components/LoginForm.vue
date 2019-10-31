@@ -5,9 +5,14 @@
                 
                 <v-card class="elevation-12">
                     <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm">
-                        <v-toolbar flat>
-                            <v-toolbar-title><v-img src='/img/logo.png'></v-img></v-toolbar-title>
-                            <v-spacer></v-spacer>
+                        <v-toolbar flat >
+                                <v-spacer/>
+                                <v-toolbar-title>
+                                     <transition name="fade" > 
+                                        <img v-show="logoShow" src='~assets/img/logo.png' :class="{test:flag, test2:!flag}"/>
+                                     </transition> 
+                                </v-toolbar-title>
+                                <v-spacer/>
                         </v-toolbar>
                         <v-card-text>
                             <v-select
@@ -60,9 +65,13 @@
     </v-container>
 </template>
 <script>
+
 export default {
      data(){
         return{
+            testshow : true,
+            logoShow : false,
+            flag : false,
             period : ['1교시','2교시'],
             showPassword : false,
             valid: false,
@@ -88,9 +97,13 @@ export default {
         onSubmitForm(){
             console.log(this.$refs.form)
             if(this.$refs.form.validate()){
-                 this.$router.push({
-                         path : '/attendList',
-                });
+                this.testshow = !this.testshow;
+                //  this.$router.push({
+                //          path : '/attendList',
+                // });
+
+
+
                 // this.$store.dispatch('users/signUp', {
                 //     nickname : this.nickname,
                 //     email : this.email,
@@ -106,9 +119,36 @@ export default {
             }else{
                 alert("입력값을 확인하세요.");
             }
+        },
+        fadeNext: function() {
+            this.logoShow=true;
         }
+    },
+    mounted() { 
+        setTimeout(this.fadeNext, 1000)
+    },
+    created: function() {
+         this.$nextTick(function() {
+              
+        });
     },
  }
 </script>
-<style scoped>
+<style>
+
+.fade { 
+    transition: all 0.25s;
+} 
+.fade-enter-active { 
+    transition: all 0.25s ease; 
+} 
+.fade-leave-active { 
+    transition: all 0.25s cubic-bezier(1, 0.5, 0.8, 1); 
+} 
+.fade-enter, 
+.fade-leave-active { 
+    opacity: 0; transform: translateY(-100px); 
+}
+
+
 </style>
