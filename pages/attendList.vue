@@ -15,6 +15,7 @@
  import InfoList from '~/components/InfoList';
  import StudentList from '~/components/StudentList';
     export default {
+        layout:'user',
         components:{
             InfoList,
             StudentList,

@@ -8,8 +8,8 @@
                         <v-toolbar flat >
                                 <v-spacer/>
                                 <v-toolbar-title>
-                                     <transition name="fade" > 
-                                        <img v-show="logoShow" src='~assets/img/logo.png' :class="{test:flag, test2:!flag}"/>
+                                     <transition name="fade" appear> 
+                                        <img  src='~assets/img/logo.png' :class="{test:flag, test2:!flag}"/>
                                      </transition> 
                                 </v-toolbar-title>
                                 <v-spacer/>
@@ -123,9 +123,6 @@ export default {
         fadeNext: function() {
             this.logoShow=true;
         }
-    },
-    mounted() { 
-        setTimeout(this.fadeNext, 1000)
     },
     created: function() {
          this.$nextTick(function() {

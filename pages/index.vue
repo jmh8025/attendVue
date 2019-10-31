@@ -1,12 +1,13 @@
 <template>
-    <LoginForm/>
+    <LoadingForm/>
 </template>
 
 <script>
- import LoginForm from '~/components/LoginForm';
+ import LoadingForm from '~/components/LoadingForm';
     export default {
+       
         components:{
-            LoginForm,
+            LoadingForm,
         },
     data(){
         return{
