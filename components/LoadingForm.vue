@@ -107,9 +107,9 @@ export default {
             console.log(this.$refs.form)
             if(this.$refs.form.validate()){
                 this.testshow = !this.testshow;
-                //  this.$router.push({
-                //          path : '/attendList',
-                // });
+                  this.$router.push({
+                          path : '/attendList',
+                 });
             }else{
                 alert("입력값을 확인하세요.");
             }
@@ -121,7 +121,6 @@ export default {
                 this.afterLogo2(el,done);
                 // done();
              }, 2500);
-             
         },
         afterLogo2(el,done){
             setTimeout(()=>{
@@ -130,7 +129,6 @@ export default {
                 this.loginFormShow=true;
                 done();
             },1500);
-            
         },
         fadeLogo(){
             this.logoShow=true;
@@ -161,16 +159,14 @@ export default {
     opacity: 0;  
 }
 
-
-
 .fade-login { 
-    transition: all 1.5s;
+    transition: all 3s;
 } 
 .fade-login-enter-active { 
-    transition: all 1.5s ease; 
+    transition: all 3s ease; 
 } 
 .fade-login-leave-active { 
-    transition: all 1.5s cubic-bezier(1, 0.5, 0.8, 1); 
+    transition: all 3s cubic-bezier(1, 0.5, 0.8, 1); 
 } 
 .fade-login-enter, 
 .fade-login-leave-active { 
