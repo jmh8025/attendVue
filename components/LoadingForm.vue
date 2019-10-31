@@ -113,7 +113,7 @@ export default {
         afterLogo(el,done){
              setTimeout(()=>{
                 el.style.transform = `translateY(-167px)`;
-                el.style.transition = `all 1.5s ease`;
+                el.style.transition = `all 1s ease`;
                 this.afterLogo2(el,done);
                 // done();
              }, 2500);
@@ -134,7 +134,7 @@ export default {
             this.$refs.logo.style.transform = `translateY(-167px)`;
             setTimeout(()=>{
                 this.$refs.logo.style.transform = `translateY(0px)`;
-                this.$refs.logo.style.transition = `all 1.5s ease`;
+                this.$refs.logo.style.transition = `all 1s ease`;
                 this.goList();
             },300);
             setTimeout(()=>{
@@ -156,27 +156,28 @@ export default {
 </script>
 <style>
 .fade { 
-    transition: all 1.5s;
+    transition: all 1s;
 } 
 .fade-enter-active { 
-    transition: all 1.5s ease; 
+    transition: all 1s ease; 
 } 
 .fade-leave-active { 
-    transition: all 1.5s cubic-bezier(1, 0.5, 0.8, 1); 
+    transition: all 1s cubic-bezier(1, 0.5, 0.8, 1); 
 } 
 .fade-enter, 
 .fade-leave-active { 
     opacity: 0;  
 }
 
+
 .fade-login { 
-    transition: all 3s;
+    transition: all 1s;
 } 
 .fade-login-enter-active { 
-    transition: all 3s ease; 
+    transition: all 1s ease; 
 } 
 .fade-login-leave-active { 
-    transition: all 1.5s cubic-bezier(1, 0.5, 0.8, 1); 
+    transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1); 
 } 
 .fade-login-enter,
 .fade-login-leave-active { 
