@@ -12,7 +12,7 @@
     <v-btn class="ma-2" tile dark color="indigo" @click="showModal2 = true">
     <v-icon dark>mdi-account-plus</v-icon>사진찍기
   </v-btn>
-  <img src="https://attend-smu.mncapro.com/newImage/011700001.jpg" alt="" style="height: 156px; width: 98px;border: 0;">
+  <img :src="img" alt="" style="height: 156px; width: 98px;border: 0;">
  </div>
   <div class="text-center">
   <v-btn class="ma-2" tile dark color="indigo" >
@@ -39,18 +39,10 @@
         />
 
             <div class="row">
-                <v-btn class="ma-2" tile dark color="indigo" >
+                <v-btn class="ma-2" tile dark color="indigo" @click="onCapture">
                     <v-icon dark>mdi-camera-iris</v-icon>
                 </v-btn>
             </div>
-            <div class="col-md-6">
-                <h2>Captured Image</h2>
-                <figure class="figure">
-                    <img :src="img" class="img-responsive" />
-                </figure>
-            </div>
-
-
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -73,7 +65,7 @@ export default {
     },
      data(){
         return{
-             img: null,
+            img: null,
             camera: null,
             deviceId: null,
             devices: [],
