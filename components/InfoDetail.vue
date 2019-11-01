@@ -56,6 +56,8 @@
                         <button type="button" class="btn btn-primary" @click="onCapture">Capture Photo</button>
                         <button type="button" class="btn btn-danger" @click="onStop">Stop Camera</button>
                         <button type="button" class="btn btn-success" @click="onStart">Start Camera</button>
+                        <button type="button" class="btn btn-success" @click="onCameras">Start onCameras</button>
+                        <button type="button" class="btn btn-success" @click="onCameraChange">Start onCameraChange</button>
                     </div>
                 </div>
             <div class="col-md-6">
