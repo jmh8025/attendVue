@@ -29,9 +29,41 @@
         <v-card-text> 
 
 
-             <web-cam />
+             <web-cam 
+              ref="webcam"
+            :device-id="deviceId"
+            width="100%"
+            @started="onStarted"
+            @stopped="onStopped"
+            @error="onError"
+            @cameras="onCameras"
+            @camera-change="onCameraChange"
+             
+             />
 
-
+            <div class="row">
+                    <div class="col-md-12">
+                        <select v-model="camera">
+                            <option>-- Select Device --</option>
+                            <option
+                                v-for="device in devices"
+                                :key="device.deviceId"
+                                :value="device.deviceId"
+                            >{{ device.label }}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary" @click="onCapture">Capture Photo</button>
+                        <button type="button" class="btn btn-danger" @click="onStop">Stop Camera</button>
+                        <button type="button" class="btn btn-success" @click="onStart">Start Camera</button>
+                    </div>
+                </div>
+            <div class="col-md-6">
+                <h2>Captured Image</h2>
+                <figure class="figure">
+                    <img :src="img" class="img-responsive" />
+                </figure>
+            </div>
 
 
         </v-card-text>
@@ -56,9 +88,10 @@ export default {
     },
      data(){
         return{
-            video: {},
-            canvas: {},
-            captures: [],
+             img: null,
+            camera: null,
+            deviceId: null,
+            devices: [],
             showModal2 : false,
             Lists: [
                 {
@@ -88,20 +121,53 @@ export default {
         showList() {
             this.$emit('showStudentList');
         },
-        capture() {
-            this.canvas = this.$refs.canvas;
-            var context = this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480);
-            this.captures.push(canvas.toDataURL("image/png"));
+       onCapture() {
+            this.img = this.$refs.webcam.capture();
+        },
+        onStarted(stream) {
+            console.log("On Started Event", stream);
+        },
+        onStopped(stream) {
+            console.log("On Stopped Event", stream);
+        },
+        onStop() {
+            this.$refs.webcam.stop();
+        },
+        onStart() {
+            this.$refs.webcam.start();
+        },
+        onError(error) {
+            console.log("On Error Event", error);
+        },
+        onCameras(cameras) {
+            this.devices = cameras;
+            console.log("On Cameras Event", cameras);
+        },
+        onCameraChange(deviceId) {
+            this.deviceId = deviceId;
+            this.camera = deviceId;
+            console.log("On Camera Change Event", deviceId);
         }
 
     },
     mounted() {
-        this.video = this.$refs.video;
-        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-                this.srcObject = stream; 
-                this.video.play();
-            });
+    },
+     computed: {
+        device: function() {
+            return this.devices.find(n => n.deviceId === this.deviceId);
+        }
+    },
+    watch: {
+        camera: function(id) {
+            this.deviceId = id;
+        },
+        devices: function() {
+            // Once we have a list select the first one
+            const [first, ...tail] = this.devices;
+            if (first) {
+                this.camera = first.deviceId;
+                this.deviceId = first.deviceId;
+            }
         }
     },
  }
