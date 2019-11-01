@@ -27,19 +27,16 @@
       <v-card>
         <v-card-title class="headline">QR검색</v-card-title>
         <v-card-text> 
-
-
-             <web-cam 
-              ref="webcam"
+        <web-cam 
+            ref="webcam"
             :device-id="deviceId"
             width="100%"
             @started="onStarted"
             @stopped="onStopped"
             @error="onError"
             @cameras="onCameras"
-            @camera-change="onCameraChange"
-             
-             />
+            @camera-change="onCameraChange"  
+        />
 
             <div class="row">
                     <div class="col-md-12">
@@ -123,7 +120,7 @@ export default {
         showList() {
             this.$emit('showStudentList');
         },
-       onCapture() {
+        onCapture() {
             this.img = this.$refs.webcam.capture();
         },
         onStarted(stream) {
@@ -166,7 +163,10 @@ export default {
         devices: function() {
             // Once we have a list select the first one
             const [first, ...tail] = this.devices;
-            if (first) {
+            if (this.devices.length > 1) {
+                this.camera = this.devices[1].deviceId;
+                this.deviceId = this.devices[1].deviceId;
+            }else if(first){
                 this.camera = first.deviceId;
                 this.deviceId = first.deviceId;
             }
