@@ -41,6 +41,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    'vue-web-cam/nuxt'
   ],
   /*
   ** vuetify module configuration

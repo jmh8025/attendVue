@@ -22,7 +22,8 @@
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
     "nuxt": "^2.9.2",
-    "vue-qrcode-reader": "^2.1.1"
+    "vue-qrcode-reader": "^2.1.1",
+    "vue-web-cam": "^1.8.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.9",
