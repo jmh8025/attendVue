@@ -25,7 +25,7 @@
     <v-row justify="center">
     <v-dialog v-model="showModal2" persistent max-width="290">
       <v-card>
-        <v-card-title class="headline">QR검색</v-card-title>
+        <v-card-title class="headline">사진 찍기</v-card-title>
         <v-card-text> 
         <web-cam 
             ref="webcam"
@@ -39,24 +39,10 @@
         />
 
             <div class="row">
-                    <div class="col-md-12">
-                        <select v-model="camera">
-                            <option>-- Select Device --</option>
-                            <option
-                                v-for="device in devices"
-                                :key="device.deviceId"
-                                :value="device.deviceId"
-                            >{{ device.label }}</option>
-                        </select> 
-                    </div>
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-primary" @click="onCapture">Capture Photo</button>
-                        <button type="button" class="btn btn-danger" @click="onStop">Stop Camera</button>
-                        <button type="button" class="btn btn-success" @click="onStart">Start Camera</button>
-                        <button type="button" class="btn btn-success" @click="onCameras">Start onCameras</button>
-                        <button type="button" class="btn btn-success" @click="onCameraChange">Start onCameraChange</button>
-                    </div>
-                </div>
+                <v-btn class="ma-2" tile dark color="indigo" >
+                    <v-icon dark>mdi-camera-iris</v-icon>
+                </v-btn>
+            </div>
             <div class="col-md-6">
                 <h2>Captured Image</h2>
                 <figure class="figure">
