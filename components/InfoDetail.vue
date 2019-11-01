@@ -9,6 +9,9 @@
       </tbody>
   </v-simple-table>
  <div class="text-center">
+    <v-btn class="ma-2" tile dark color="indigo" @click="showModal2 = true">
+    <v-icon dark>mdi-account-plus</v-icon>사진찍기
+  </v-btn>
   <img src="https://attend-smu.mncapro.com/newImage/011700001.jpg" alt="" style="height: 156px; width: 98px;border: 0;">
  </div>
   <div class="text-center">
@@ -19,7 +22,33 @@
     <v-icon dark>mdi-format-list-bulleted</v-icon>리스트 보기
   </v-btn>
   </div>
-   
+    <v-row justify="center">
+    <v-dialog v-model="showModal2" persistent max-width="290">
+      <v-card>
+        <v-card-title class="headline">QR검색</v-card-title>
+        <v-card-text> 
+
+
+             <div><video ref="video" id="video" width="640" height="480" autoplay></video></div>
+            <div><button id="snap" v-on:click="capture()">Snap Photo</button></div>
+            <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
+            <ul>
+                <li v-for="c in captures" :key="c">
+                    <img v-bind:src="c" height="50" />
+                </li>
+            </ul>
+
+
+
+
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" text @click="showModal2 = false">끄기</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-row>
   
 </div>
 </template>
@@ -31,6 +60,10 @@ export default {
     },
      data(){
         return{
+             video: {},
+            canvas: {},
+            captures: [],
+            showModal2 : false,
             Lists: [
                 {
                     key: '이름',
@@ -59,7 +92,21 @@ export default {
         showList() {
             this.$emit('showStudentList');
         },
+        capture() {
+            this.canvas = this.$refs.canvas;
+            var context = this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480);
+            this.captures.push(canvas.toDataURL("image/png"));
+        }
 
+    },
+    mounted() {
+        this.video = this.$refs.video;
+        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+                this.video.src = window.URL.createObjectURL(stream);
+                this.video.play();
+            });
+        }
     },
  }
 </script>
