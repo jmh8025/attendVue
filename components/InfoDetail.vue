@@ -50,7 +50,7 @@
                                 :key="device.deviceId"
                                 :value="device.deviceId"
                             >{{ device.label }}</option>
-                        </select>
+                        </select> 
                     </div>
                     <div class="col-md-12">
                         <button type="button" class="btn btn-primary" @click="onCapture">Capture Photo</button>
