@@ -103,7 +103,7 @@ export default {
         this.video = this.$refs.video;
         if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-                this.srcObject = stream;
+                this.srcObject = stream; 
                 this.video.play();
             });
         }
