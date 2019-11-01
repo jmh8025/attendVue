@@ -103,7 +103,7 @@ export default {
         this.video = this.$refs.video;
         if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-                this.video.src = window.URL.createObjectURL(stream);
+                this.srcObject = stream;
                 this.video.play();
             });
         }
@@ -114,4 +114,14 @@ export default {
 .v-data-table td{
     height: 30px;
 }
+    #video {
+        background-color: #000000;
+    }
+    #canvas {
+        display: none;
+    }
+    li {
+        display: inline;
+        padding: 5px;
+    }
 </style>
